@@ -1,1 +1,7 @@
-/home/samuel/.gitconfig
+[user]
+	name = SamuelCano03
+	email = 102400537+SamuelCano03@users.noreply.github.com
+[core]
+	autocrlf = input
+[credential]
+	helper = manager
