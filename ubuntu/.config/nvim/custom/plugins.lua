@@ -4,7 +4,6 @@ local overrides = require("custom.configs.overrides")
 local plugins = {
 
      -- Override plugin definition options
-
      {
           "neovim/nvim-lspconfig",
           dependencies = {
@@ -33,6 +32,26 @@ local plugins = {
           opts = overrides.nvimtree,
      },
 
+          {
+          "NvChad/nvterm",
+          opts = overrides.nvterm,
+     },
+
+     -- To make a plugin not be loaded
+     -- {
+     --   "NvChad/nvim-colorizer.lua",
+     --   enabled = false
+     -- },
+
+     -- All NvChad plugins are lazy-loaded by default
+     -- For a plugin to be loaded, you will need to set either `ft`, `cmd`, `keys`, `event`, or set `lazy = false`
+     -- If you want a plugin to load on startup, add `lazy = false` to a plugin spec, for example
+     -- {
+     --   "mg979/vim-visual-multi",
+     --   lazy = false,
+     -- }
+
+     -- My added plugind :D
      {
           "alexghergh/nvim-tmux-navigation",
           event = "VeryLazy",
@@ -60,22 +79,24 @@ local plugins = {
         config=true,
      },
      {
-          "NvChad/nvterm",
-          opts = overrides.nvterm,
-     }
-     -- To make a plugin not be loaded
-     -- {
-     --   "NvChad/nvim-colorizer.lua",
-     --   enabled = false
-     -- },
+          "folke/tokyonight.nvim",
+          lazy = false,
+          priority = 1000,
+          opts = {
+               style = "storm",
+               transparent = true,
+               styles = {
+                    sidebars = "transparent",
+                    floats = "transparent",
+               },
+          },
+          config = function(_, opts)
+               local tokyonight = require "tokyonight"
+               tokyonight.setup(opts)
+               tokyonight.load()
+          end,
+     },
 
-     -- All NvChad plugins are lazy-loaded by default
-     -- For a plugin to be loaded, you will need to set either `ft`, `cmd`, `keys`, `event`, or set `lazy = false`
-     -- If you want a plugin to load on startup, add `lazy = false` to a plugin spec, for example
-     -- {
-     --   "mg979/vim-visual-multi",
-     --   lazy = false,
-     -- }
 }
 
 return plugins
